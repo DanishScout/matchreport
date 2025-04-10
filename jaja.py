@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager # version 4.0.1
