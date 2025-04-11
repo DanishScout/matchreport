@@ -181,7 +181,7 @@ if match_data:
 pitch = Pitch(pitch_type='uefa', pitch_color='#2E2E2A', line_color='#616A67')
 
 # Increase figure size
-fig, ax = pitch.draw(figsize=(10, 8), dpi=250)
+fig, ax = pitch.draw(figsize=(10, 8))
 
 # Plot shots
 for index, row in df.iterrows():
@@ -575,6 +575,9 @@ fig.text(0.5, 0.03, "Generated via danishscout.streamlit.app", fontproperties=cu
 
 # Add horizontal line at the top
 fig.add_artist(plt.Line2D((0, 1), (0.95, 0.95), color='white', linewidth=1.5, alpha=0.5, transform=fig.transFigure))
+
+# Save the plot with 300 DPI and the specified filename
+plt.savefig('overview.png', dpi=250, bbox_inches='tight')
 
 # Display the plot in the Streamlit app
 st.pyplot(fig)
