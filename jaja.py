@@ -35,7 +35,7 @@ import matplotlib.colors as mcolors
 from io import BytesIO
 
 # Title for the Streamlit app
-st.title('Fetch Match Data from Fotmob')
+st.title('Fetch Match Data from Fotmoasdasdb')
 
 # User input for the Fotmob match URL
 fotmob_url = st.text_input("Enter Fotmob Match URL", 'https://www.fotmob.com/en-GB/matches/agf-vs-brondby-if/2aozua#4757611')
