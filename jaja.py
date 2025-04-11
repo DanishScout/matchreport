@@ -34,35 +34,31 @@ from scipy.stats import gaussian_kde
 import matplotlib.colors as mcolors
 from io import BytesIO
 
+# Title for the Streamlit app
+st.title('Fetch Match Data from Fotmob')
+
+# User input for the Fotmob match URL
+fotmob_url = st.text_input("Enter Fotmob Match URL", 'https://www.fotmob.com/en-GB/matches/agf-vs-brondby-if/2aozua#4757611')
+submit_button = st.button("Fetch Match Data")
+
+# Stop further execution until the button is clicked
+if not submit_button:
+    st.stop()
+
+font_path = "Panton Light.otf"
+font_pathh = "Panton Regular.otf"
+font_pathhh = "Panton Bold.otf"
+font_pathhhh = "Panton ExtraBold.otf"
+
+# Load the font using FontProperties
+custom_font = fm.FontProperties(fname=font_path)
+custom_fontt = fm.FontProperties(fname=font_pathh)
+custom_fonttt = fm.FontProperties(fname=font_pathhh)
+custom_fontttt = fm.FontProperties(fname=font_pathhhh)
+
 # Define the run functions
 def run():
 
-    # Title for the Streamlit app
-    st.title('Fetch Match Data from Fotmob')
-    
-    # User input for the Fotmob match URL
-    fotmob_url = st.text_input("Enter Fotmob Match URL", 'https://www.fotmob.com/en-GB/matches/agf-vs-brondby-if/2aozua#4757611')
-    submit_button = st.button("Fetch Match Data")
-    
-    # Stop further execution until the button is clicked
-    if not submit_button:
-        st.stop()
-        
-    match_id = 'djkc8rfolq78jxkqouq6btc7o'
-    home_team_id = '9qsmopgutr7ut5g6workk8w4i'
-    away_team_id = '5rz9enoyknpg8ji78za5b82p0'
-    
-    font_path = "Panton Light.otf"
-    font_pathh = "Panton Regular.otf"
-    font_pathhh = "Panton Bold.otf"
-    font_pathhhh = "Panton ExtraBold.otf"
-    
-    # Load the font using FontProperties
-    custom_font = fm.FontProperties(fname=font_path)
-    custom_fontt = fm.FontProperties(fname=font_pathh)
-    custom_fonttt = fm.FontProperties(fname=font_pathhh)
-    custom_fontttt = fm.FontProperties(fname=font_pathhhh)
-    
     # Set up logging
     logging.basicConfig(filename='match_data_fetch.log', level=logging.INFO)
     
