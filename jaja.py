@@ -44,6 +44,10 @@ submit_button = st.button("Fetch Match Data")
 # Stop further execution until the button is clicked
 if not submit_button:
     st.stop()
+    
+match_id = 'djkc8rfolq78jxkqouq6btc7o'
+home_team_id = '9qsmopgutr7ut5g6workk8w4i'
+away_team_id = '5rz9enoyknpg8ji78za5b82p0'
 
 font_path = "Panton Light.otf"
 font_pathh = "Panton Regular.otf"
@@ -82,7 +86,7 @@ def run():
             
             # Scroll to trigger network logs
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(1)  # Allow time for logs to populate
+            time.sleep(10)  # Allow time for logs to populate
     
             # Retrieve performance logs
             logs = driver.get_log('performance')
