@@ -338,15 +338,15 @@ ax.text(66, 43, f'{accurate_passes_away_formatted}', color=passes_color_away, ha
 ####################
 
 # Extract accurate passes data
-accurate_crosses_home_formatted = stats_dict['Crosses'][0]
-accurate_crosses_away_formatted = stats_dict['Crosses'][1]
+accurate_corners_home_formatted = stats_dict['Corners'][0]
+accurate_corners_away_formatted = stats_dict['Corners'][1]
 
 # Determine colors for accurate passes values
-crosses_color_home, crosses_color_away = color_by_magnitude(accurate_crosses_home_formatted, accurate_crosses_away_formatted)
+corners_color_home, corners_color_away = color_by_magnitude(accurate_corners_home_formatted, accurate_corners_away_formatted)
 
 # Add text annotations for accurate passes values with colors and text effect
-ax.text(39, 35, f'{accurate_crosses_home_formatted}', color=crosses_color_home, ha='center', fontsize=common_fontsize, fontproperties=common_fontproperties, path_effects=text_effect)
-ax.text(66, 35, f'{accurate_crosses_away_formatted}', color=crosses_color_away, ha='center', fontsize=common_fontsize, fontproperties=common_fontproperties, path_effects=text_effect)
+ax.text(39, 35, f'{accurate_corners_home_formatted}', color=corners_color_home, ha='center', fontsize=common_fontsize, fontproperties=common_fontproperties, path_effects=text_effect)
+ax.text(66, 35, f'{accurate_corners_away_formatted}', color=corners_color_away, ha='center', fontsize=common_fontsize, fontproperties=common_fontproperties, path_effects=text_effect)
 
 #######
 
@@ -387,11 +387,11 @@ ax.text(66, 11, f'{total_shots_away}', color=shots_color_away, ha='center', font
 
 
 # Define custom display names for the stats
-stat_titles = ['Ball possession', 'Passes', 'Crosses', 'Expected goals (xG)',
+stat_titles = ['Ball possession', 'Passes', 'Corners', 'Expected goals (xG)',
                'xG on target (xGOT)', 'Total shots']
 
 # Replace the display names as needed
-custom_display_names = ['POSSESSION', 'PASSES', 'CROSSES', 'xG',
+custom_display_names = ['POSSESSION', 'PASSES', 'CORNERS', 'xG',
                         'xGOT', 'SHOTS']
 
 # Define y positions for the stat titles with a -5 difference between each
@@ -420,7 +420,7 @@ def add_colored_line(ax, x_start, x_end, y_pos, home_percentage, away_percentage
 metrics = [
     ('Ball possession', ball_possession_home, ball_possession_away),
     ('Passes', accurate_passes_home_formatted, accurate_passes_away_formatted),
-    ('Corners', accurate_crosses_home_formatted, accurate_crosses_away_formatted),
+    ('Corners', accurate_corners_home_formatted, accurate_corners_away_formatted),
     ('xG', xG_home, xG_away),
     ('xG on target (xGOT)', xGOT_home, xGOT_away),
     ('Total shots', total_shots_home, total_shots_away)
