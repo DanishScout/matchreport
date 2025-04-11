@@ -181,7 +181,7 @@ if match_data:
 pitch = Pitch(pitch_type='uefa', pitch_color='#2E2E2A', line_color='#616A67')
 
 # Increase figure size
-fig, ax = pitch.draw(figsize=(10, 8))
+fig, ax = pitch.draw(figsize=(10, 8), dpi=250)
 
 # Plot shots
 for index, row in df.iterrows():
@@ -233,6 +233,13 @@ for index, row in df.iterrows():
 # Extract team colors
 home_team_colors = match_data.get('general', {}).get('teamColors', {}).get('darkMode', {}).get('home')
 away_team_colors = match_data.get('general', {}).get('teamColors', {}).get('darkMode', {}).get('away')
+
+# Extract team colors
+home_team_name = match_data.get('general', {}).get('homeTeam', {}).get('name', {})
+away_team_name = match_data.get('general', {}).get('awayTeam', {}).get('name', {})
+match_score = match_data.get('header', {}).get('status', {}).get('scoreStr', {})
+league_name = match_data.get('general', {}).get('parentLeagueName')
+round_name = match_data.get('general', {}).get('parentLeagueSeason')
 
 # Filter out entries for minutes 45.5 and 90.5 from momentum data
 momentum_data_filtered = [moment for moment in momentum_data if moment['minute'] not in [45.5, 90.5]]
@@ -551,8 +558,23 @@ ax.add_patch(arrow1)
 # Add text annotations for attacking direction
 ax.text(52.5, 71.25, 'Attacking direction', color='white', fontsize=13, ha='center', va='bottom', fontproperties=custom_fonttt, alpha=0.8)
 
-# Save the plot with 300 DPI and the specified filename
-plt.savefig('overview.png', dpi=300, bbox_inches='tight')
+#TITLE
+custom_title = f'{home_team_name.upper()}  {match_score}  {away_team_name.upper()}'
+
+# Add a custom title
+fig.text(0.5, 1.01, custom_title, fontproperties=custom_fontttt, fontsize=30, color='white', ha='center')
+
+# Format the suptitle
+suptitle_text = f"{league_name}, {round_name} | Opta Data | @DanishScout_"
+
+# Add the suptitle
+fig.text(0.5, 0.975, suptitle_text, fontproperties=custom_fonttt, fontsize=12, color='white', ha='center', alpha=0.5)
+
+# Add a custom title
+fig.text(0.5, 0.03, "Generated via danishscout.streamlit.app", fontproperties=custom_fontt, fontsize=10, color='white', ha='center')
+
+# Add horizontal line at the top
+fig.add_artist(plt.Line2D((0, 1), (0.95, 0.95), color='white', linewidth=1.5, alpha=0.5, transform=fig.transFigure))
 
 # Display the plot in the Streamlit app
 st.pyplot(fig)
