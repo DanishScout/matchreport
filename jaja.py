@@ -45,11 +45,11 @@ custom_fontt = fm.FontProperties(fname=font_pathh)
 custom_fonttt = fm.FontProperties(fname=font_pathhh)
 custom_fontttt = fm.FontProperties(fname=font_pathhhh)
 
-# Title for the Streamlit app
-st.title('Fetch Match Data from Fotmob')
+# Sett up the Streamlit app
+st.markdown("<h1 style='font-size: 24px;'>Match Report</h1>", unsafe_allow_html=True)
 
 # User input for the Fotmob match URL
-fotmob_url = st.text_input("Enter Fotmob Match URL", 'https://www.fotmob.com/en-GB/matches/agf-vs-brondby-if/2aozua#4757611')
+fotmob_url = st.text_input("Insert Fotmob Match URL:", 'https://www.fotmob.com/en-GB/matches/agf-vs-brondby-if/2aozua#4757611')
 submit_button = st.button("Fetch Match Data")
 
 # Stop further execution until the button is clicked
@@ -562,13 +562,16 @@ custom_title = f'{home_team_name.upper()}  {match_score}  {away_team_name.upper(
 fig.text(0.5, 1.01, custom_title, fontproperties=custom_fontttt, fontsize=30, color='white', ha='center')
 
 # Format the suptitle
-suptitle_text = f"{league_name}, {round_name} | Opta Data | @DanishScout_"
+suptitle_text = f"{league_name}, {round_name} | Data via FotMob"
 
 # Add the suptitle
 fig.text(0.5, 0.975, suptitle_text, fontproperties=custom_fonttt, fontsize=12, color='white', ha='center', alpha=0.5)
 
 # Add horizontal line at the top
 fig.add_artist(plt.Line2D((0, 1), (0.95, 0.95), color='white', linewidth=1.5, alpha=0.5, transform=fig.transFigure))
+
+# Add a custom title
+fig.text(0.5, 0.03, "Generated via danishscout.streamlit.app", fontproperties=custom_fonttt, fontsize=10, color='white', ha='center')
 
 # Display the plot in the Streamlit app
 st.pyplot(fig)
