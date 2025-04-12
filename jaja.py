@@ -3,17 +3,19 @@ import json
 import pandas as pd
 import streamlit as st
 import tempfile
-import shutil
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
 
 # Function to get match data and save to CSV
 def get_match_data_and_save_csv(match_id, file_name):
-    # Set up Selenium WebDriver options without user-data-dir
+    # Create a unique directory for Chrome profile
+    profile_dir = tempfile.mkdtemp()
+
+    # Set up Selenium WebDriver options with a unique profile directory
     options = webdriver.ChromeOptions()
+    options.add_argument(f"user-data-dir={profile_dir}")
     options.set_capability("goog:loggingPrefs", {"performance": "ALL", "browser": "ALL"})
 
     # Initialize the WebDriver
