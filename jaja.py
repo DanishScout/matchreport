@@ -2,17 +2,22 @@ import time
 import json
 import pandas as pd
 import streamlit as st
+import tempfile
+import shutil
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
 
 # Function to get match data and save to CSV
 def get_match_data_and_save_csv(match_id, file_name):
+    # Create a temporary directory for user data
+    user_data_dir = tempfile.mkdtemp()
+
     # Set up Selenium WebDriver options
     options = webdriver.ChromeOptions()
+    options.add_argument(f"--user-data-dir={user_data_dir}")  # Set a unique user data directory
     options.set_capability("goog:loggingPrefs", {"performance": "ALL", "browser": "ALL"})
 
     # Initialize the WebDriver
@@ -71,6 +76,8 @@ def get_match_data_and_save_csv(match_id, file_name):
         st.error(f"An error occurred while processing the match: {e}")
     finally:
         driver.quit()
+        # Clean up the temporary user data directory
+        shutil.rmtree(user_data_dir)
 
 # Streamlit UI
 st.title('Soccer Match Data Extractor')
