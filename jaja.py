@@ -9,6 +9,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 import tempfile
 import os
 
+# Input field for match ID
+match_id = st.text_input("Enter Match ID", 'djkc8rfolq78jxkqouq6btc7o')
+
+# File name input
+file_name = st.text_input("Enter File Name to Save Data", 'match_data.csv')
+
 # Function to set up the WebDriver with unique user data directory
 def create_driver():
     # Create a temporary directory for Chrome's user data
@@ -76,12 +82,6 @@ def get_match_data_and_save_csv(driver, match_id, file_name):
 
 # Streamlit app
 st.title("Soccer Match Data Scraper")
-
-# Input field for match ID
-match_id = st.text_input("Enter Match ID", 'djkc8rfolq78jxkqouq6btc7o')
-
-# File name input
-file_name = st.text_input("Enter File Name to Save Data", 'match_data.csv')
 
 # Button to trigger data scraping
 if st.button("Get Match Data"):
