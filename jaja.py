@@ -6,16 +6,25 @@ import matplotlib.font_manager as fm
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-import time
+import tempfile
+import os
 
-# Function to set up the WebDriver
+# Function to set up the WebDriver with unique user data directory
 def create_driver():
+    # Create a temporary directory for Chrome's user data
+    temp_dir = tempfile.mkdtemp()
+    
+    # Set up Chrome options
     options = webdriver.ChromeOptions()
     options.set_capability("goog:loggingPrefs", {"performance": "ALL", "browser": "ALL"})
+    options.add_argument(f'--user-data-dir={temp_dir}')  # Specify the unique user data directory
+    options.add_argument('--no-sandbox')  # Avoid sandbox issues in cloud environments
+    options.add_argument('--headless')  # Run Chrome in headless mode (no GUI)
+    
+    # Create and return the WebDriver
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
     driver.set_page_load_timeout(10)
+    
     return driver
 
 # Function to get match data and save it to a CSV
